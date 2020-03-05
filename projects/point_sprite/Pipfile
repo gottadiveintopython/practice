@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+kivy = "==1.11.1"
+numpy = "*"
+cython = "*"
+asynckivy = {git = "https://github.com/gottadiveintopython/asynckivy",ref = "stable"}
+
+[requires]
+python_version = "3.7"
+
+[dev-packages]
+pytest = "*"
