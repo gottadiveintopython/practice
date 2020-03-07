@@ -42,19 +42,16 @@ class SampleApp(App):
         _keep_showing_fps()
 
         def _load_anim_list():
-            from importlib import import_module
-            anim_list = root.ids.anim_list
-            where_anim_plays = root.ids.where_anim_plays
-            module_names = (
-                'ver_py_array',
-                'ver_py_numpy',
-            )
             def on_state(button, state):
-                if button.coro is not None:
+                from importlib import import_module
+                try:
                     button.coro.close()
+                except AttributeError:
+                    pass
                 if state == 'down':
-                    coro = button.mod.animation(
-                        where_anim_plays,
+                    mod = import_module('.' + button.text, 'point_sprite')
+                    coro = mod.animation(
+                        root.ids.where_anim_plays,
                         # max_sprites=10000,
                         # max_spawn_interval=0,  # 0 means spawns every frame
                         # color='#FFFFFF66',
@@ -64,8 +61,12 @@ class SampleApp(App):
                     )
                     asynckivy.start(coro)
                     button.coro = coro
+            anim_list = root.ids.anim_list
+            module_names = (
+                'ver_py_array',
+                'ver_py_numpy',
+            )
             for name in module_names:
-                mod = import_module('.' + name, 'point_sprite')
                 button = Factory.ToggleButton(
                     text=name,
                     group='sprite_anim',
@@ -73,8 +74,6 @@ class SampleApp(App):
                     outline_width=1,
                     outline_color=(0, 0, 0, 1),
                 )
-                button.mod = mod
-                button.coro = None
                 button.bind(state=on_state)
                 anim_list.add_widget(button)
         _load_anim_list()
