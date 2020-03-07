@@ -16,9 +16,9 @@ async def animation(
 
     import numpy as np
     visible_arr = np.zeros(max_sprites, dtype=bool)
-    x_arr = np.empty(max_sprites)
-    y_arr = np.empty(max_sprites)
-    velocity_y_arr = np.empty(max_sprites)
+    x_arr = np.zeros(max_sprites)
+    y_arr = np.zeros(max_sprites)
+    velocity_y_arr = np.zeros(max_sprites)
     output_arr = np.empty(max_sprites * 2)
 
     from kivy.utils import get_color_from_hex
