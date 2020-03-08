@@ -55,14 +55,17 @@ async def animation(
             await sleep(2)
             max_y = widget.height + pointsize
             visible_arr[
-                logical_or(
-                    logical_and(
-                        y_arr < min_y,
-                        velocity_y_arr < 0,
-                    ),
-                    logical_and(
-                        y_arr > max_y,
-                        velocity_y_arr > 0,
+                logical_and(
+                    visible_arr,
+                    logical_or(
+                        logical_and(
+                            y_arr < min_y,
+                            velocity_y_arr < 0,
+                        ),
+                        logical_and(
+                            y_arr > max_y,
+                            velocity_y_arr > 0,
+                        ),
                     ),
                 )
             ] = False
