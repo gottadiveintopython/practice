@@ -65,6 +65,7 @@ class SampleApp(App):
             module_names = (
                 'ver_py_array',
                 'ver_py_numpy',
+                'ver_py_numpy2',
             )
             for name in module_names:
                 button = Factory.ToggleButton(
